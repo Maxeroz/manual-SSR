@@ -85,3 +85,4 @@ const server = createServer((req, res) => {
 server.listen(8000, () => console.log("Listening for requests on port 8000"));
 
 // Manual SSR With React DOM + Node.js
+// The Missing Piece: Hydration
