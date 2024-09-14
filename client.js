@@ -1,34 +1,19 @@
 ReactDOM.hydrateRoot(document.getElementById("root"), <Home />);
 
 const pizzas = [
-  {
-    name: "Focaccia",
-    price: 6,
-  },
-  {
-    name: "Pizza Margherita",
-    price: 10,
-  },
-  {
-    name: "Pizza Spinaci",
-    price: 12,
-  },
-  {
-    name: "Pizza Funghi",
-    price: 12,
-  },
-  {
-    name: "Pizza Prosciutto",
-    price: 15,
-  },
+  { name: "Focaccia", price: 6 },
+  { name: "Pizza Margherita", price: 10 },
+  { name: "Pizza Spinaci", price: 12 },
+  { name: "Pizza Funghi", price: 12 },
+  { name: "Pizza Prosciutto", price: 15 },
 ];
 
+// Определение тех же компонентов, что и на сервере
 function Home() {
   return (
     <div>
       <h1>🍕 Fast React Pizza Co.</h1>
       <p>This page has been rendered with React on the server 🤯</p>
-
       <h2>Menu</h2>
       <ul>
         {pizzas.map((pizza) => (

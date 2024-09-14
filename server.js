@@ -5,34 +5,19 @@ const { renderToString } = require("react-dom/server");
 const React = require("react");
 
 const pizzas = [
-  {
-    name: "Focaccia",
-    price: 6,
-  },
-  {
-    name: "Pizza Margherita",
-    price: 10,
-  },
-  {
-    name: "Pizza Spinaci",
-    price: 12,
-  },
-  {
-    name: "Pizza Funghi",
-    price: 12,
-  },
-  {
-    name: "Pizza Prosciutto",
-    price: 15,
-  },
+  { name: "Focaccia", price: 6 },
+  { name: "Pizza Margherita", price: 10 },
+  { name: "Pizza Spinaci", price: 12 },
+  { name: "Pizza Funghi", price: 12 },
+  { name: "Pizza Prosciutto", price: 15 },
 ];
 
+// Компонент страницы
 function Home() {
   return (
     <div>
       <h1>🍕 Fast React Pizza Co.</h1>
       <p>This page has been rendered with React on the server 🤯</p>
-
       <h2>Menu</h2>
       <ul>
         {pizzas.map((pizza) => (
@@ -43,6 +28,7 @@ function Home() {
   );
 }
 
+// Компонент счетчика
 function Counter() {
   const [count, setCount] = React.useState(0);
   return (
@@ -53,6 +39,7 @@ function Counter() {
   );
 }
 
+// Компонент пункта меню
 function MenuItem({ pizza }) {
   return (
     <li>
@@ -64,19 +51,25 @@ function MenuItem({ pizza }) {
   );
 }
 
+// Чтение HTML-шаблона и клиентского JavaScript
 const htmlTemplate = readFileSync(`${__dirname}/index.html`, "utf-8");
 const clientJS = readFileSync(`${__dirname}/client.js`, "utf-8");
 
+// Создание HTTP-сервера
 const server = createServer((req, res) => {
   const pathName = parse(req.url, true).pathname;
 
+  // Если запрошен корневой URL
   if (pathName === "/") {
+    // Рендеринг React-компонента на сервере
     const renderedReact = renderToString(<Home />);
     const html = htmlTemplate.replace("%%%CONTENT%%%", renderedReact);
 
     res.writeHead(200, { "Content-type": "text/html" });
     res.end(html);
-  } else if (pathName === "/client.js") {
+  }
+  // Если запрашивается клиентский JavaScript
+  else if (pathName === "/client.js") {
     res.writeHead(200, { "Content-type": "application/javascript" });
     res.end(clientJS);
   } else {
@@ -84,7 +77,7 @@ const server = createServer((req, res) => {
   }
 });
 
+// Запуск сервера на порту 8000
 server.listen(8000, () => console.log("Listening for requests on port 8000"));
 
-// Manual SSR With React DOM + Node.js
-// The Missing Piece: Hydration
+// What is Next.js?
